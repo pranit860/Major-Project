@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<meta charset="UTF-8"> 
+<head>
+	<script src="javascript/jquery-1.8.2.js"></script>
+	<script src="javascript/mfs100-9.0.2.6.js"></script>
+	<script src="javascript/scanning.js"></script>
+</head>
+
+<body  style="background-color:powderblue;">
+		<div align="center" class="scancard">
+		<h2>FingerPrint Verification</h2>
+		<table>
+			<tr>
+				<td width="150px" height="190px" class="img">
+					<img id="imgFinger" width="150px" height="190px" />
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<button  class="button button1" id="buttonscanning" onclick="clicked()">Start Scanning</button>
+				</td>
+			</tr>
+		</table>
+		<p id="i"></p>
+	</div>
+</body>
+<style>
+	.scancard {
+ 		 padding: 40px;
+ 		 width: 274px;
+ 		 background-color:rgb(248, 248, 250);
+ 		 margin: 0 auto 10px;
+ 		 border-radius: 12px;
+  		 box-shadow: 6px 6px 6px rgba(0, 0, 0, 0.3);
+ 		 top:30%;
+		 right : 30%;
+		 border: 2px solid #080000;
+}
+.button {
+		background-color: #1a2a5a; 
+		border: none;
+		color: white;
+		padding: 20px;
+		text-align: center;
+		text-decoration: none;
+		display: inline-block;
+		font-size: 16px;
+		margin: 1px 1px;
+		cursor: pointer;
+	}
+	.button1 { box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.3);border-radius: 12px;}
+		
+		
+		</style>
+
+</html>

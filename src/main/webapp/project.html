@@ -1,0 +1,97 @@
+<html>
+<meta charset="UTF-8"> 
+<head>
+	<title>Project</title>
+</head>
+
+<body style="background-color:powderblue;">
+	<div class="right">
+		<a href="index.html">LOG OUT</a>
+	</div>
+
+	<p id="para"></p>
+	<script>
+		if (typeof (Storage) !== "undefined") {
+			document.getElementById("para").innerHTML = "Welcome " + sessionStorage.getItem("username");
+			//alert(localStorage.getItem("username"));
+		}
+	</script>
+
+
+
+	<div id="my_image">
+		<img src="image/vote.jpg" height="300px" width="700px" alt="" align="center" />
+		<div>
+			<br/>
+
+			<div id="my_div1" style="background-color: #F7F7F7;width:500px;height:50px;border: 2px solid #080000;" align="center">
+				<br/>
+				<strong>SELECT YOUR OPTION TO PROCEED FOR VERIFICATION: </strong>
+			</div>
+
+			<div id="my_div2" style="background-color:#6495ED;width:500px;height:225px;border: 2px solid #030000;">
+				&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+				<img src="image/otp.png" height="128px" width="128px" alt="" align="center" /> &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+				<img src="image/adhar.png" height="128px" width="128px" alt="" align="center" />
+				<br/>
+				<br/> &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+				<button class="button button1" id="buttonotp" onclick="location.href='page2.html';">SMS OTP</button>
+				&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+				<button class="button button2" id="buttonadharvoter" onclick="location.href='page3.html';">AadharID/VoterID</button>
+			</div>
+</body>
+<style>
+	.right {
+		text-align: right;
+		float: right;
+
+	}
+
+	#my_image {
+		position: absolute;
+		top: 10%;
+		right: 30%;
+		margin: -50px auto 0;
+	}
+
+	#my_div1 {
+		position: absolute;
+		top: 120%;
+		right: 14%;
+		margin: -50px auto 0;
+		box-shadow: 6px 6px 6px rgba(0, 0, 0, 0.3);
+		border-radius: 12px;
+	}
+
+	#my_div2 {
+		position: absolute;
+		top: 140%;
+		right: 14%;
+		margin: -50px auto 0;
+		box-shadow: 6px 6px 6px rgba(0, 0, 0, 0.3);
+		border-radius: 12px;
+	}
+
+	.button {
+		background-color: #1a2a5a;
+		border: none;
+		color: white;
+		padding: 20px;
+		text-align: center;
+		text-decoration: none;
+		display: inline-block;
+		font-size: 16px;
+		margin: 1px 1px;
+		cursor: pointer;
+	}
+
+	.button1 {
+		border-radius: 12px;
+	}
+
+	.button2 {
+		border-radius: 12px;
+	}
+</style>
+
+</html>
