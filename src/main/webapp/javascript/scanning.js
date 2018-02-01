@@ -19,7 +19,9 @@ function Verify(isotemplate) {
 
 		if (res.httpStaus) {
 			if (res.data.Status) {
+				
 				alert("Finger matched");
+				
 				return true;
 			} else {
 				if (res.data.ErrorCode != "0") {

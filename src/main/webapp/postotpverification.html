@@ -27,18 +27,14 @@
 				<button class="button button1" id="buttonback"
 					onclick="location.href='project.html';">BACK</button>
 				<button class="button button2" id="buttonproceed"
-					onclick="location.href='demo.html';">PROCEED</button>
+					onclick="execute()">PROCEED</button>
 			</td>
 		</tr>
 	</table>
 
 	</div>
-	<script type="text/javascript" >
-	document.getElementById("para1").innerHTML=localStorage.getItem("voterid");
-	document.getElementById("para2").innerHTML=localStorage.getItem("fname");
-	document.getElementById("para3").innerHTML=localStorage.getItem("lname");
-	document.getElementById("para4").innerHTML=localStorage.getItem("mob");
-	</script>
+	<script src="javascript/postverification.js"></script>
+	
 </body>
 <style>
 table {

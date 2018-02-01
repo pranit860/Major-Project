@@ -143,7 +143,7 @@ public class Queries {
 	public AadharTable detailedinfo(String aadhar_num) {
 		try {
 			String query="Select * from aadhar_table where id_aadhar=?";
-			Long l = Long.parseLong(aadhar_num);
+			long l = Long.parseLong(aadhar_num);
 			PreparedStatement stmt = connection.prepareStatement(query);
 			stmt.setLong(1,l);
 			ResultSet rs = stmt.executeQuery();
@@ -163,6 +163,36 @@ public class Queries {
 			e.printStackTrace();
 		}
 		return aadhar;
+	}
+	public BiometricTable retrieveFingerData(String adhar) throws SQLException
+	{
+		BiometricTable bio=new BiometricTable();
+		long data=Long.parseLong(adhar);
+		String query="Select * from biometric_table where id_aadhar=?";
+		PreparedStatement stmt = connection.prepareStatement(query);
+		stmt.setLong(1,data);
+		ResultSet rs = stmt.executeQuery();
+		if (rs.next()==true) {
+			bio.setId_aadhar(data);
+			bio.setIndex_finger_right(rs.getString(3));
+			bio.setThumb_print(rs.getString(2));
+			bio.setRing_finger_right(rs.getString(4));
+		}
+		return bio;
+	}
+	public boolean setFingerData(BiometricTable bio) throws SQLException
+	{
+		String query="update biometric_table set thumb_print=?, index_finger_right=?, ring_finger_right=? where id_aadhar=?";
+		PreparedStatement stmt = connection.prepareStatement(query);
+		stmt.setString(1,bio.getThumb_print());
+		stmt.setString(2, bio.getIndex_finger_right());
+		stmt.setString(3, bio.getRing_finger_right());
+		stmt.setLong(4, bio.getId_aadhar());
+		int res=stmt.executeUpdate();
+		if(res!=0)
+			return true;
+		else
+			return false;
 	}
 
 }

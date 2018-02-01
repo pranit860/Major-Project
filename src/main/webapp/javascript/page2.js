@@ -1,7 +1,7 @@
 function execute() {
 	var dataToSend = {};
 	dataToSend["otp"] = document.getElementById("otp").value;
-	dataToSend["bid"]=sessionStorage.getItem("username");
+	dataToSend["bid"]=localStorage.getItem("username");
 	// if (typeof (Storage) !== "undefined") {
 	// var str=document.getElementById("otp").value;
 	// sessionStorage.setItem("username",str);

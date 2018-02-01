@@ -6,7 +6,7 @@ function execute()
     dataToSend["password"]=document.getElementById("pass").value;
     if (typeof (Storage) !== "undefined") {
         var str=document.getElementById("userid").value;
-        sessionStorage.setItem("username",str);
+        localStorage.setItem("username",str);
       }
       else {
         alert("Browser Doesnt support web storage");

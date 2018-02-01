@@ -16,7 +16,7 @@ else {
 }
 
 function clicked1() {
-	alert("onclick");
+	//alert("onclick");
 	var quality = 60;
 	var time = 20;
 	var res = CaptureFinger(quality, time);
@@ -40,7 +40,7 @@ function clicked1() {
 
 }
 function clicked2() {
-	alert("onclick");
+	//alert("onclick");
 	var quality = 60;
 	var time = 20;
 	var res = CaptureFinger(quality, time);
@@ -65,7 +65,7 @@ function clicked2() {
 
 }
 function clicked3() {
-	alert("onclick");
+	//alert("onclick");
 	var quality = 60;
 	var time = 20;
 	var res = CaptureFinger(quality, time);
@@ -90,16 +90,16 @@ function clicked3() {
 function savedata() {
 	var jsonData2={};
 	if (finger1 !== null && finger2 !== null && finger3 !== null) {
-		jsonData2["finger1"]=finger1;
-		jsonData2["finger2"]=finger2;
-		jsonData2["finger3"]=finger3;
+		jsonData2["thumb_print"]=finger1;
+		jsonData2["index_finger_right"]=finger2;
+		jsonData2["ring_finger_right"]=finger3;
+		jsonData2["id_aadhar"]=document.getElementById("adhar").value;
 		$.ajax({
 			type: "POST",
-			url: "http://localhost:8080/finalproject/webapi/fingerdata",
+			url: "http://localhost:8080/finalproject/webapi/storedata",
 			data: JSON.stringify(jsonData2),
 			contentType: "application/json; charset=utf-8",
 			crossDomain: true,
-			dataType: "json",
 			success: function (data) {
 				alert(data);
 			},
