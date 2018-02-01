@@ -69,24 +69,24 @@ function clicked() {
 	} else {
 		alert("ERROR");
 	}
-	// $.ajax({
-	// type: "POST",
-	// url: "http://localhost:8080/finalproject/webapi/fingerdata",
-	// data: JSON.stringify(jsonData2),
-	// contentType: "application/json; charset=utf-8",
-	// crossDomain: true,
-	// dataType: "json",
-	// success: function (data) {
-	// //alert(data);
-	// localStorage.setItem("mname", data["middle_name"]);
-	// localStorage.setItem("gender", data["gender"]);
-	// localStorage.setItem("email", data["email_id"]);
-	// localStorage.setItem("dob", data["dob"]);
-	// window.location="http://localhost:8080/finalproject/finalpage.html";
-	// },
-	// error: function()
-	// {
-	// alert("error");
-	// }
-	// });
+	 $.ajax({
+	 type: "POST",
+	 url: "http://localhost:8080/finalproject/webapi/fingerdata",
+	 data: JSON.stringify(jsonData2),
+	 contentType: "application/json; charset=utf-8",
+	 crossDomain: true,
+	 dataType: "json",
+	 success: function (data) {
+	 //alert(data);
+	 localStorage.setItem("mname", data["middle_name"]);
+	 localStorage.setItem("gender", data["gender"]);
+	 localStorage.setItem("email", data["email_id"]);
+	 localStorage.setItem("dob", data["dob"]);
+	 window.location="http://localhost:8080/finalproject/finalpage.html";
+	 },
+	 error: function()
+	 {
+	 alert("error");
+	 }
+	 });
 }
