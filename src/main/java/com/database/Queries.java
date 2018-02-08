@@ -173,6 +173,7 @@ public class Queries {
 		stmt.setLong(1,data);
 		ResultSet rs = stmt.executeQuery();
 		if (rs.next()==true) {
+			System.out.println("Data Retrieved");
 			bio.setId_aadhar(data);
 			bio.setIndex_finger_right(rs.getString(3));
 			bio.setThumb_print(rs.getString(2));

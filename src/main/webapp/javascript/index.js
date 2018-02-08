@@ -1,4 +1,10 @@
 
+function pageload(url)
+{
+	alert("INSIDE Pageload");
+	window.location=url;
+	return true;
+}
 function execute()
 {
     var dataToSend={};
@@ -6,7 +12,7 @@ function execute()
     dataToSend["password"]=document.getElementById("pass").value;
     if (typeof (Storage) !== "undefined") {
         var str=document.getElementById("userid").value;
-        localStorage.setItem("username",str);
+        sessionStorage.setItem("username",str);
       }
       else {
         alert("Browser Doesnt support web storage");
@@ -14,19 +20,23 @@ function execute()
       $.ajax({
 	    type: "POST",
 	    url: "http://localhost:8080/finalproject/webapi/userverify",
+	    dataType: "json",
 	    data: JSON.stringify(dataToSend),
-	    contentType: "application/json",
+	    contentType: "application/json; charset=utf-8",
         crossDomain: true,
+        //async: true,
 	   success: function (data) { 
-		   		
-              if(data["id_constituency"]==0)
+		   		//alert(data["id_constituency"]);
+              if(data["id_constituency"]===0)
               {
             	  alert("Id Password Doesnt Match!!!");
-                    window.location="http://localhost:8080/finalproject/index.html";
+                    location.assign("http://localhost:8080/finalproject/index.html");
+
               }   
               else{
-                    
-            	  window.location="http://localhost:8080/finalproject/project.html";
+                    alert("INSIDE Else");
+                  
+            	  
               }
 
 	   },
@@ -35,4 +45,6 @@ function execute()
 			alert("error");
 		}
 	  });
+      pageload("http://localhost:8080/finalproject/project.html");
+      return true;
 }

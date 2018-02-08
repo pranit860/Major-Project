@@ -11,23 +11,23 @@ if (check.httpStaus) {
 	alert("No Scanner");
 }
 
-function Verify(isotemplate) {
+function Verify(isotemplate,iso) {
 	try {
-		// var isotemplate = document.getElementById('txtIsoTemplate').value;
-		var isotemplate2 = "Rk1SACAyMAAAAAGkAAABPAFiAMUAxQEAAAAoQUC0ALakZECWAMcnZECOAKIoZEDlALrDSUDVAIfMZECEAQGjZECgAGr1ZIBzAHyuZIBoAPosUEBOALQ2XYEHAPm9XYBdAQW6PIEJAQeyXUCGAFMXXUBZAGcwUECtADYqL0CWADk1NYBOAF6xPID+AEZCSUCbAVKcPEDaAU4VFEBxAVkLPEC/ALiqZEDZAL63SUCoAIypZIBxAL8wZEDpAJXLZED8AKzOXUEHAKbSZEB0AQEhUICFARMjV0CvASMfXYChAFb7ZEDfASQlZECrAE37PEC3ATgdV0CkADoWPEDEADj1PECHADw1NYEOASI1NYD1AT4ZUEEJATIoPEChACg9G0BbAVQJG4CoAKaqZEDLAOGoZECzAIu+ZEBzANEpZED5AMjHXUDEARKdZEDiAQykZIDvAQWqXUCaARogUIDaAGPgZEESAI3XZIBPAPUxL0A/AL23XYEaAPzNV0BmAFEiIUDNAUMbXYDnAEBxSUC9ADQYL0BwAUEQQ4DHAVING4DjACaKBwAA";
-		var res = VerifyFinger(isotemplate, isotemplate2);
+		//var isotemplate = document.getElementById('txtIsoTemplate').value;
+		//var isotemplate2 = "Rk1SACAyMAAAAAGkAAABPAFiAMUAxQEAAAAoQUC0ALakZECWAMcnZECOAKIoZEDlALrDSUDVAIfMZECEAQGjZECgAGr1ZIBzAHyuZIBoAPosUEBOALQ2XYEHAPm9XYBdAQW6PIEJAQeyXUCGAFMXXUBZAGcwUECtADYqL0CWADk1NYBOAF6xPID+AEZCSUCbAVKcPEDaAU4VFEBxAVkLPEC/ALiqZEDZAL63SUCoAIypZIBxAL8wZEDpAJXLZED8AKzOXUEHAKbSZEB0AQEhUICFARMjV0CvASMfXYChAFb7ZEDfASQlZECrAE37PEC3ATgdV0CkADoWPEDEADj1PECHADw1NYEOASI1NYD1AT4ZUEEJATIoPEChACg9G0BbAVQJG4CoAKaqZEDLAOGoZECzAIu+ZEBzANEpZED5AMjHXUDEARKdZEDiAQykZIDvAQWqXUCaARogUIDaAGPgZEESAI3XZIBPAPUxL0A/AL23XYEaAPzNV0BmAFEiIUDNAUMbXYDnAEBxSUC9ADQYL0BwAUEQQ4DHAVING4DjACaKBwAA";
+		var res = VerifyFinger(isotemplate, iso);
 
 		if (res.httpStaus) {
 			if (res.data.Status) {
 				
-				alert("Finger matched");
+				//alert("Finger matched");
 				
 				return true;
 			} else {
 				if (res.data.ErrorCode != "0") {
 					alert(res.data.ErrorDescription);
 				} else {
-					alert("Finger not matched");
+					//alert("Finger not matched");
 				}
 			}
 		} else {
@@ -39,13 +39,59 @@ function Verify(isotemplate) {
 	return false;
 
 }
-
+function retData()
+{
+	var jsonData2 = {};
+	jsonData2["adharno"]=localStorage.getItem("adhar");
+	$.ajax({
+		 type: "POST",
+		 url: "http://localhost:8080/finalproject/webapi/fulldata",
+		 data: JSON.stringify(jsonData2),
+		 contentType: "application/json; charset=utf-8",
+		 crossDomain: true,
+		 dataType: "json",
+		 success: function (data) {
+		 //alert(data);
+		 localStorage.setItem("fname", data["first_name"]);
+		 localStorage.setItem("lname", data["last_name"]);
+		 localStorage.setItem("mname", data["middle_name"]);
+		 localStorage.setItem("email", data["email_id"]);
+		 localStorage.setItem("mob", data["contact_no"]);
+		 localStorage.setItem("gender", data["gender"]);
+		 localStorage.setItem("dob", data["dob"]);
+		 },
+		 error: function()
+		 {
+		 alert("error");
+		 }
+		 });
+}
 function clicked() {
+	var jsonData2 = {};
+	jsonData2["data"]=localStorage.getItem("adhar");
 	// alert("onclick");
+	$.ajax({
+		 type: "POST",
+		 url: "http://localhost:8080/finalproject/webapi/fingerdata",
+		 data: JSON.stringify(jsonData2),
+		 contentType: "application/json; charset=utf-8",
+		 crossDomain: true,
+		 dataType: "json",
+		 success: function (data) {
+		 //alert(data);
+		 localStorage.setItem("thumb_print", data["thumb_print"]);
+		 localStorage.setItem("index_finger_right", data["index_finger_right"]);
+		 localStorage.setItem("ring_finger_right", data["ring_finger_right"]);
+		 },
+		 error: function()
+		 {
+		 alert("error");
+		 }
+		 });
 	var quality = 60;
 	var time = 20;
 	var res = CaptureFinger(quality, time);
-	var jsonData2 = {};
+	
 	// var jsonData1=null;
 	if (res.httpStaus != null) {
 		// alert("Successfully!!!");
@@ -54,12 +100,20 @@ function clicked() {
 			console.log(res);
 			document.getElementById('imgFinger').src = "data:image/bmp;base64,"+ res.data.BitmapData;
 			var iso = res.data.IsoTemplate;
-			var ret = Verify(iso);
-			if (ret == true) {
+			
+			if (Verify(localStorage.getItem("thumb_print"),iso)||Verify(localStorage.getItem("index_finger_right"),iso)||Verify(localStorage.getItem("ring_finger_right"),iso)) {
 				document.getElementById("i").innerHTML = "Finger Print Matched Successfully";
+				alert("FingerPrint Matched Successfully");
+				 localStorage.setItem("thumb_print", "");
+				 localStorage.setItem("index_finger_right", "");
+				 localStorage.setItem("ring_finger_right", "");
+				 retData();
 				window.location = "http://localhost:8080/finalproject/finalpage.html";
 			} else {
 				alert("Finger Print Doesnt Match");
+				 localStorage.setItem("thumb_print", "");
+				 localStorage.setItem("index_finger_right", "");
+				 localStorage.setItem("ring_finger_right", "");
 				window.location = "http://localhost:8080/finalproject/project.html";
 			}
 
@@ -69,24 +123,5 @@ function clicked() {
 	} else {
 		alert("ERROR");
 	}
-	 $.ajax({
-	 type: "POST",
-	 url: "http://localhost:8080/finalproject/webapi/fingerdata",
-	 data: JSON.stringify(jsonData2),
-	 contentType: "application/json; charset=utf-8",
-	 crossDomain: true,
-	 dataType: "json",
-	 success: function (data) {
-	 //alert(data);
-	 localStorage.setItem("mname", data["middle_name"]);
-	 localStorage.setItem("gender", data["gender"]);
-	 localStorage.setItem("email", data["email_id"]);
-	 localStorage.setItem("dob", data["dob"]);
-	 window.location="http://localhost:8080/finalproject/finalpage.html";
-	 },
-	 error: function()
-	 {
-	 alert("error");
-	 }
-	 });
+	 
 }
