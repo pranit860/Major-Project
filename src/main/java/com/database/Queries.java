@@ -1,13 +1,11 @@
 package com.database;
-
-
 import java.sql.*;
 
 public class Queries {
 
 	DBConnection dbconnection;
 	Connection connection;
-	VoterTable voter;
+	//VoterTable voter;
 	BoothTable booth;
 	ValidVoter validVoter;
 	AadharTable aadhar;
@@ -15,20 +13,21 @@ public class Queries {
 	public Queries() {
 		dbconnection = new DBConnection();
 		connection = dbconnection.connect();
-		voter = new VoterTable();
+		//voter = new VoterTable();
 		booth=new BoothTable();
 		validVoter =new ValidVoter();
 		aadhar=new AadharTable();
 	}
 
-	public ValidVoter sendDataThroughOtp(String otp_num) {
+	public ValidVoter sendDataThroughOtp(String otp_num, String b_id) {
 
 		try {
 			String query = "select v.id_voter, v.id_booth, a.id_aadhar, a.first_name,a.last_name, a.contact_no from voter_table v"
-					+ " left join aadhar_table a on v.id_aadhar=a.id_aadhar where otp=?";
+					+ " left join aadhar_table a on v.id_aadhar=a.id_aadhar where otp=? and id_booth=?";
 
 			PreparedStatement stmt = connection.prepareStatement(query);
 			stmt.setString(1, otp_num);
+			stmt.setString(2,b_id);
 			ResultSet rs = stmt.executeQuery();
 			// System.out.println("try block");
 			if (rs.next()) {
@@ -51,15 +50,16 @@ public class Queries {
 
 	}
 
-	public ValidVoter sendDataThroughAadharId(String aadhar_num) {
+	public ValidVoter sendDataThroughAadharId(String aadhar_num, String b_id) {
 		Long l = Long.parseLong(aadhar_num);
 
 		try {
 			String query = "select v.id_voter, v.id_booth, a.id_aadhar, a.first_name,a.last_name, "
-					+ "a.contact_no from voter_table v natural join aadhar_table a  where id_aadhar=?";
+					+ "a.contact_no from voter_table v natural join aadhar_table a  where id_aadhar=? and id_booth=?";
 
 			PreparedStatement stmt = connection.prepareStatement(query);
 			stmt.setLong(1, l);
+			stmt.setString(2,b_id);
 			ResultSet rs = stmt.executeQuery();
 			// System.out.println("try block");
 			if (rs.next()) {
@@ -81,15 +81,16 @@ public class Queries {
 
 	}
 
-	public ValidVoter sendDataThroughVoterId(String voter_num) {
+	public ValidVoter sendDataThroughVoterId(String voter_num, String b_id) {
 
 		try {
 			String query = "select v.id_voter, v.id_booth, a.id_aadhar, a.first_name,a.last_name, "
-					+ "a.contact_no from voter_table v left join aadhar_table a on v.id_aadhar=a.id_aadhar where id_voter=?";
+					+ "a.contact_no from voter_table v left join aadhar_table a on v.id_aadhar=a.id_aadhar where id_voter=? and id_booth=? ";
 
 
 			PreparedStatement stmt = connection.prepareStatement(query);
 			stmt.setString(1, voter_num);
+			stmt.setString(2,b_id);
 			ResultSet rs = stmt.executeQuery();
 			// System.out.println("try block");
 			if (rs.next()) {
@@ -164,36 +165,42 @@ public class Queries {
 		}
 		return aadhar;
 	}
-	public BiometricTable retrieveFingerData(String adhar) throws SQLException
-	{
-		BiometricTable bio=new BiometricTable();
-		long data=Long.parseLong(adhar);
-		String query="Select * from biometric_table where id_aadhar=?";
-		PreparedStatement stmt = connection.prepareStatement(query);
-		stmt.setLong(1,data);
-		ResultSet rs = stmt.executeQuery();
-		if (rs.next()==true) {
-			System.out.println("Data Retrieved");
-			bio.setId_aadhar(data);
-			bio.setIndex_finger_right(rs.getString(3));
-			bio.setThumb_print(rs.getString(2));
-			bio.setRing_finger_right(rs.getString(4));
+	
+	public int verifyLog(String aadhar_num) {
+		int a=0;
+		try {
+			String query="Select log_status from log_table where id_aadhar=?";
+			long l = Long.parseLong(aadhar_num);
+			PreparedStatement stmt = connection.prepareStatement(query);
+			stmt.setLong(1,l);
+			ResultSet rs = stmt.executeQuery();
+			if(rs.next()) {
+			a=rs.getInt(1);
+			}
+			else {
+				a=2;
+			}
+				
 		}
-		return bio;
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		return a;
 	}
-	public boolean setFingerData(BiometricTable bio) throws SQLException
-	{
-		String query="update biometric_table set thumb_print=?, index_finger_right=?, ring_finger_right=? where id_aadhar=?";
-		PreparedStatement stmt = connection.prepareStatement(query);
-		stmt.setString(1,bio.getThumb_print());
-		stmt.setString(2, bio.getIndex_finger_right());
-		stmt.setString(3, bio.getRing_finger_right());
-		stmt.setLong(4, bio.getId_aadhar());
-		int res=stmt.executeUpdate();
-		if(res!=0)
-			return true;
-		else
-			return false;
+	public void updateLog(String aadhar_num) {
+		try 
+		{
+			String query="update log_table set log_status=? where id_aadhar=? ";
+			long l = Long.parseLong(aadhar_num);
+			PreparedStatement stmt = connection.prepareStatement(query);
+			stmt.setInt(1,1);
+			stmt.setLong(2,l);
+			stmt.executeUpdate();
+			
+		}
+		catch(Exception e){
+			e.printStackTrace();
+		}
 	}
 
 }

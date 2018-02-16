@@ -12,7 +12,7 @@
 	<p id="para"></p>
 	<script>
 		if (typeof (Storage) !== "undefined") {
-			document.getElementById("para").innerHTML = "Welcome " + sessionStorage.getItem("username");
+			document.getElementById("para").innerHTML = "Welcome " + localStorage.getItem("username");
 			//alert(localStorage.getItem("username"));
 		}
 	</script>

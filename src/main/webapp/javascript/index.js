@@ -1,9 +1,17 @@
 
-function pageload(url)
+function pageload()
 {
+	
 	alert("INSIDE Pageload");
-	window.location=url;
-	return true;
+	if(localStorge.getItem("verify")=="1")
+		{
+			window.location.replace("http://localhost:8080/finalproject/project.html");
+		}
+	else
+		{
+			window.location.replace("http://localhost:8080/finalproject/index.html");
+		}
+	return;
 }
 function execute()
 {
@@ -12,7 +20,7 @@ function execute()
     dataToSend["password"]=document.getElementById("pass").value;
     if (typeof (Storage) !== "undefined") {
         var str=document.getElementById("userid").value;
-        sessionStorage.setItem("username",str);
+        localStorage.setItem("username",str);
       }
       else {
         alert("Browser Doesnt support web storage");
@@ -24,27 +32,31 @@ function execute()
 	    data: JSON.stringify(dataToSend),
 	    contentType: "application/json; charset=utf-8",
         crossDomain: true,
-        //async: true,
+        async: true,
 	   success: function (data) { 
 		   		//alert(data["id_constituency"]);
               if(data["id_constituency"]===0)
               {
             	  alert("Id Password Doesnt Match!!!");
-                    location.assign("http://localhost:8080/finalproject/index.html");
+            	  localStorage.setItem("verify","0");
+            	  window.location.replace("http://localhost:8080/finalproject/index.html");
 
               }   
               else{
                     alert("INSIDE Else");
-                  
-            	  
+                    localStorage.setItem("verify","1");
+                    window.location.replace("http://localhost:8080/finalproject/project.html");
               }
 
 	   },
 		error: function()
 		{
 			alert("error");
+		},
+		complete: function()
+		{
+			
 		}
 	  });
-      pageload("http://localhost:8080/finalproject/project.html");
-      return true;
+      
 }
