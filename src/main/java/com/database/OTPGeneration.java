@@ -1,3 +1,5 @@
+package com.database;
+
 import java.util.Random;
 
 public class OTPGeneration {

@@ -1,62 +1,66 @@
-
-function pageload()
+function successGot(data)
 {
-	
-	alert("INSIDE Pageload");
-	if(localStorge.getItem("verify")=="1")
-		{
-			window.location.replace("http://localhost:8080/finalproject/project.html");
-		}
-	else
-		{
-			window.location.replace("http://localhost:8080/finalproject/index.html");
-		}
-	return;
+	 if(data["id_constituency"]===0)
+     {
+   	  alert("Id Password Doesnt Match!!!");
+   	  window.location="http://localhost:8080/finalproject/index.html";
+
+     }   
+     else{
+           //alert("INSIDE Else");
+           localStorage.setItem("b_id",data["id_booth"]);
+           //alert(data["id_booth"]);
+           window.location="http://localhost:8080/finalproject/project.html";
+           //$('#mainarea').load("http://localhost:8080/finalproject/project.html");
+     }
 }
-function execute()
+function failureGot()
 {
-    var dataToSend={};
-    dataToSend["userId"]=document.getElementById("userid").value;
-    dataToSend["password"]=document.getElementById("pass").value;
-    if (typeof (Storage) !== "undefined") {
-        var str=document.getElementById("userid").value;
-        localStorage.setItem("username",str);
-      }
-      else {
-        alert("Browser Doesnt support web storage");
-      }
-      $.ajax({
-	    type: "POST",
-	    url: "http://localhost:8080/finalproject/webapi/userverify",
-	    dataType: "json",
-	    data: JSON.stringify(dataToSend),
-	    contentType: "application/json; charset=utf-8",
-        crossDomain: true,
-        async: true,
-	   success: function (data) { 
-		   		//alert(data["id_constituency"]);
-              if(data["id_constituency"]===0)
-              {
-            	  alert("Id Password Doesnt Match!!!");
-            	  localStorage.setItem("verify","0");
-            	  window.location.replace("http://localhost:8080/finalproject/index.html");
+	alert("error");
+}
 
-              }   
-              else{
-                    alert("INSIDE Else");
-                    localStorage.setItem("verify","1");
-                    window.location.replace("http://localhost:8080/finalproject/project.html");
-              }
 
-	   },
-		error: function()
+if(localStorage.getItem("username"))
+{
+	 window.location="http://localhost:8080/finalproject/project.html";
+}
+var btn=document.querySelector('#btn');
+btn.addEventListener('click',checkLogin)
+
+function checkLogin()
+{
+	var id=document.querySelector('#userid').value;
+	var pass=document.querySelector('#pass').value;
+	//console.log(id+" "+pass);
+	
+	if(id.length<12 && pass=="")
 		{
-			alert("error");
-		},
-		complete: function()
-		{
-			
+			alert("Enter Proper User Id and password!!!");
+			document.location.reload(true);
+			//break;
 		}
-	  });
-      
+	else{
+	console.log(id,pass);
+	 if (typeof (Storage) !== "undefined") {
+       localStorage.setItem("username",id);
+     }
+     else {
+       alert("Browser Doesnt support web storage");
+     }
+	 alert(localStorage.getItem("username"));
+	var data={};
+	data["userId"]=id;
+	data["password"]=pass;
+	var url="http://localhost:8080/finalproject/webapi/userverify";
+	fetch(url, {
+		  method: 'POST', // or 'PUT'
+		  body: JSON.stringify(data), 
+		  headers: new Headers({
+		    'Content-Type': 'application/json'
+		  })
+		}).then(res => res.json())
+		.then(successGot)
+		.catch(error => console.error('Error:', error));
+	}
+		
 }

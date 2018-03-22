@@ -1,6 +1,10 @@
 package com.major.repository;
 
+import javax.ws.rs.Consumes;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
 
 import com.database.Queries;
 
@@ -9,13 +13,16 @@ public class ChangeLog {
 
 	private String adhar;
 	
+	@POST
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.TEXT_PLAIN)
 	public String change(ChangeLog log)
 	{
 		Queries query=new Queries();
-		String retStatus="";
-		//code to check status
 		
-		return retStatus;
+		//code to check status
+		query.updateLog(log.getAdhar());
+		return "true";
 	}
 
 	public String getAdhar() {

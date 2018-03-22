@@ -94,19 +94,34 @@ function savedata() {
 		jsonData2["index_finger_right"]=finger2;
 		jsonData2["ring_finger_right"]=finger3;
 		jsonData2["id_aadhar"]=document.getElementById("adhar").value;
-		$.ajax({
-			type: "POST",
-			url: "http://localhost:8080/finalproject/webapi/storedata",
-			data: JSON.stringify(jsonData2),
-			contentType: "application/json; charset=utf-8",
-			crossDomain: true,
-			success: function (data) {
-				alert(data);
-			},
-			error: function () {
-				alert("error");
-			}
-		});
+//		$.ajax({
+//			type: "POST",
+//			url: "http://localhost:8080/finalproject/webapi/storedata",
+//			data: JSON.stringify(jsonData2),
+//			contentType: "application/json; charset=utf-8",
+//			crossDomain: true,
+//			success: function (data) {
+//				alert(data);
+//			},
+//			error: function () {
+//				alert("error");
+//			}
+//		});
+//		
+		
+		var url="http://localhost:8080/finalproject/webapi/storedata";
+		 
+			fetch(url, {
+				  method: 'POST', // or 'PUT'
+				  body: JSON.stringify(jsonData2), 
+				  headers: new Headers({
+				    'Content-Type': 'application/json'
+				  })
+				}).then(res => res.json())
+				.then(function(data){
+					alert(data);
+				})
+				.catch(error => console.error('Error:', error));
 	}
 	else
 	{

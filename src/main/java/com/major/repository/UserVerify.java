@@ -39,9 +39,14 @@ public class UserVerify {
 		Queries query=new Queries();
 		//verification code
 		booth=query.authentication(user.getUserId(), user.getPassword());
-		System.out.println(booth.getId_booth());
+		System.out.println(user);
 		return booth;
 		
+	}
+
+	@Override
+	public String toString() {
+		return "UserVerify [userId=" + userId + ", password=" + password + "]";
 	}
 		
 }

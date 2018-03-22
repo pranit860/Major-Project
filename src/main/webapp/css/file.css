@@ -1,0 +1,44 @@
+h3{
+  font-family: Calibri; 
+  font-size: 25pt;         
+  font-style: normal; 
+  font-weight: bold; 
+  color:SlateBlue;
+  text-align: center; 
+  text-decoration: underline
+}
+
+table{
+  font-family: Calibri; 
+  color:white; 
+  font-size: 14pt; 
+  font-style: normal;
+  width:50%;
+  font-weight: bold;
+  background-color:#6495ED; 
+  border-collapse: collapse; 
+  border-radius: 12px;
+  
+}
+
+.button {
+    background-color: #1a2a5a;
+    border: none;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 1px 1px;
+    cursor: pointer;
+}
+.button1 { box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.3);border-radius: 12px;  background-color: #4CAF50;}
+.button2 { box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.3);border-radius: 12px;  background-color: #FF0000}
+.button3 { box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.3);border-radius: 12px;}
+.button4 { box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.3);border-radius: 12px;}
+
+.wrapper {
+  text-align: center;
+}
+

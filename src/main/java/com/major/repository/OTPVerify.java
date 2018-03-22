@@ -11,12 +11,13 @@ import com.database.ValidVoter;
 @Path("otpverify")
 public class OTPVerify {
 	private String otp;
-	private String username;
-	public String getUsername() {
-		return username;
+	private String bid;
+	
+	public String getBid() {
+		return bid;
 	}
-	public void setUsername(String username) {
-		this.username = username;
+	public void setBid(String bid) {
+		this.bid = bid;
 	}
 	public String getOtp() {
 		return otp;
@@ -32,9 +33,23 @@ public class OTPVerify {
 		String otp=ot.getOtp();
 		ValidVoter voter=new ValidVoter();
 		Queries query=new Queries();
-		voter=query.sendDataThroughOtp(otp);
+		voter=query.sendDataThroughOtp(otp,ot.getBid());
 		//Database Code to execute and return appropriate object
-		System.out.println(otp+"\n"+ot.getUsername());
+		System.out.println(otp+"\n"+ot.getBid());
+		long adhar=voter.getId_aadhar();
+		int res=query.checkLog(String.valueOf(adhar));
+		if(res==-1)
+		{
+			voter.setId_voter("-1");
+		}
+		else if(res==0)
+		{
+			voter.setId_voter("0");
+		}
+		else
+		{
+			
+		}
 		return voter;
 	}
 }

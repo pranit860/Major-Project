@@ -1,0 +1,87 @@
+<html>
+
+ <head>
+    <title>plan election</title>
+  </head>
+<script type="text/javascript" src="javascript/electionplanning1.js"> 
+</script>
+<script src="javascript/jquery-1.8.2.js"></script>
+
+  <body style="background-color:powderblue;">
+      <h1 align="center"> PLAN ELECTION</h1>
+      <br>
+      <table cellpadding="10"  align="center" cellspacing="15" >
+        <tr>
+          <td>District :</td>
+        <td><select style="width:200px;">
+            <option value="Nagpur">Nagpur</option>
+        </select>
+        </td>
+        </tr>
+        <tr>
+        <td>Assembly Constituency :</td>
+        <td><select  style="width:200px;" id="assembly" name="assembly">
+            <option value="48">katol</option>
+            <option value="49">Savner</option>
+            <option value="50">Hingna</option>
+            <option value="51">umred</option>
+            <option value="52">Nagpur south west</option>
+            <option value="53">Nagpur south</option>
+            <option value="54">Nagpur east</option>
+            <option value="55">Nagpur central</option>
+            <option value="56">Nagpur west</option>
+            <option value="57">Nagpur North(sc)</option>
+            <option value="58">Kamthi</option>
+            <option value="59">Ramtek</option>
+        </select>
+        </td>
+        </tr>
+        <tr>
+        <td colspan="2" align="center"><button class="button button1" id="buttongenerate" onclick="execute()"> GENERATE OTP</button></td>
+        </tr>
+        <tr>
+        <td colspan="2" align="center"><button class="button button2" id="buttonsend"  onclick="execute1()">SEND MESSAGE</button></td>
+        </tr>
+      
+
+    </table>
+
+  </body>
+  <style>
+     table{
+       
+      font-family: Calibri; 
+      font-size: 14pt; 
+      font-style: normal;
+      width:50%;
+      font-weight: bold;
+      background-color:#6495ED; 
+      border: 2px solid #000;
+      box-shadow: 6px 6px 6px rgba(0, 0, 0, 0.3);
+      border-radius: 12px;
+    }
+  .button {
+		background-color: #1a2a5a;
+		border: none;
+		color: white;
+		padding: 20px;
+		text-align: center;
+		text-decoration: none;
+		display: inline-block;
+		font-size: 16px;
+		margin: 1px 1px;
+		cursor: pointer;
+	}
+
+	.button1 {
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.3);
+		border-radius: 12px;
+	}
+
+	.button2 {
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.3);
+		border-radius: 12px;
+	}
+  </style>
+
+</html>

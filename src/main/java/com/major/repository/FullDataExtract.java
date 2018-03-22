@@ -22,6 +22,7 @@ public class FullDataExtract {
 		AadharTable table=new AadharTable();
 		Queries queries=new Queries();
 		table=queries.detailedinfo(obj.getAdharno());
+		System.out.println(table);
 		return table;
 	}
 

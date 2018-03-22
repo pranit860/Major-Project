@@ -1,3 +1,5 @@
+package com.database;
+
 //package message;
 
 public interface MsgService {

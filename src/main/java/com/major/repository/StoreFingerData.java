@@ -20,14 +20,9 @@ public class StoreFingerData {
 	public String getDataFinger(BiometricTable bio)
 	{
 		Queries query=new Queries();
-		boolean res = false;
-		try {
-			res = query.setFingerData(bio);
-		} catch (SQLException e) {
-			
-			e.printStackTrace();
-		}
-		if(res==false)
+		int res = 0;
+		res = query.updateBiometricTable(bio);
+		if(res==0)
 		return "false";
 		else
 			return "true";

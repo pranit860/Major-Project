@@ -1,0 +1,100 @@
+<html>
+<head>
+	<title>Voter Registration</title>
+	<link rel="stylesheet" href="css/file.css">
+	
+	<script src="javascript/jquery-1.8.2.js"></script>
+	<script src="javascript/mfs100-9.0.2.6.js"></script>
+</head>
+<body style="background-color:powderblue;">
+<p id="errorgen"> </p>
+
+	<h1><center><font size=6><b>Voter Registration</b></font></center></h1>
+	<table cellpadding="10" width="50%" bgcolor="99FFFF" align="center" cellspacing="8" >
+		
+		<tr>
+			<td>
+				
+			</td>
+		</tr>
+		<tr>
+			<td colspan="3">AAdhar No</td>
+			<td colspan="3"><input type="text" name="aadharno" id="adharno" size="30" maxlength="12" required></td>
+		</tr>
+
+		<tr>
+			<td colspan="3">First Name</td>
+			<td colspan="3"><input type="text" name="studentname" id="studentname" size="30" required></td>
+		</tr>
+
+		<tr>
+			<td colspan="3">Middle Name</td>
+			<td colspan="3"><input type="text" name="middlename" id="middlename" size="30" required></td>
+		</tr>
+
+		<tr>
+			<td colspan="3">Last Name</td>
+			<td colspan="3"><input type="text" name="Lastname" id="lastname"
+			size="30" required></td>
+		</tr>
+
+
+		<tr>
+			<td colspan="3">Gender</td>
+			<td colspan="3">
+				<input type="radio" id="radio1" name="gender" value="M" size="10">Male
+				<input type="radio" id="radio1" name="gender" value="F" size="10">Female
+			</td>
+		</tr>
+		<tr>
+			<td colspan="3">Email Id</td>
+			<td colspan="3"><input type="text" name="emailid" id="emailid" size="30" required></td>
+		</tr>
+
+		<tr>
+			<td colspan="3">Date Of Birth</td>
+			<td colspan="3"><input type="date" name="dob" id="dob" size="30" max="2000-12-31"></td>
+		</tr>
+
+		<tr>
+			<td colspan="3">Mobile No</td>
+			<td colspan="3"><input type="text" name="mobileno" id="mobileno" size="30" maxlength="10" required></td>
+		</tr>
+		
+		<tr>
+			<td colspan="3"> Address</td>
+			<td colspan="3"> <textarea name="personaladdress" id="personaladdress" rows="5" cols="20" required></textarea>
+			</td>
+		</tr>
+		<tr>
+			<td  colspan="3">PinCode</td>
+			<td colspan="3" ><input type="text" name="pincode" id="pincode" size="30" maxlength="6" required><br/></td>
+		</tr>
+		
+		<tr>
+		
+		<td  colspan="3" align="center"><img  align="center" id="my_div1" style="background-color: #F7F7F7;width:100px;height:100px;border:5px solid #000;"></img><br/>
+		<button class="button button3" id="buttonfingre1" onclick="thumbfinger()">Scan Thumb</button></td>
+		<td  colspan="3" align="center"><img    align="center" id="my_div2" style="background-color: #F7F7F7;width:100px;height:100px;border:5px solid #000;"></img><br/>
+		<button class="button button4" id="buttonfingre2" onclick="indexfinger()">Scan Index finger </button></td>
+			<td  colspan="3"><img   align="center" id="my_div3" style="background-color: #F7F7F7;width:100px;height:100px;border:5px solid #000;"></img><br/>
+				<button class="button button3" id="buttonfingre1" onclick="ringfinger()">Scan Ring finger </button></td>
+		</tr>
+	<tr>
+		<td>
+
+		</td>
+	</tr>
+		
+		
+	</table>
+	<br/>
+
+	<div class="wrapper">
+	<button class="button button1" id="buttonsubmit" >SUBMIT</button>
+				<button class="button button2" id="buttonreset">RESET</button>
+				</div>
+	
+<script type="text/javascript" src="javascript/validate.js"></script>
+</body>
+</html>

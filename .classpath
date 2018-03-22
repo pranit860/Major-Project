@@ -33,8 +33,5 @@
 			<attribute name="owner.project.facets" value="java"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Program Files/Mantra/MFS100/SDK/Java/Library/commons-codec-1.9.jar"/>
-	<classpathentry kind="lib" path="C:/Program Files/Mantra/MFS100/SDK/Java/Library/commons-lang-2.4.jar"/>
-	<classpathentry kind="lib" path="C:/Program Files/Mantra/MFS100/SDK/Java/Library/MANTRA.MFS100.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

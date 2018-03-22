@@ -11,7 +11,15 @@ import com.database.ValidVoter;
 
 @Path("adharverify")
 public class AdharVerify {
-	String adhar;
+	String adhar,b_id;
+
+	public String getB_id() {
+		return b_id;
+	}
+
+	public void setB_id(String b_id) {
+		this.b_id = b_id;
+	}
 
 	public String getAdhar() {
 		return adhar;
@@ -30,11 +38,11 @@ public class AdharVerify {
 		Queries query = new Queries();
 		System.out.println(adhar);
 		if (adhar.length() == 10) {
-			voter = query.sendDataThroughVoterId(verify.getAdhar());
+			voter = query.sendDataThroughVoterId(verify.getAdhar(),verify.getB_id());
 			System.out.println("inside voter");
 		}
 		if (adhar.length() == 12) {
-			voter = query.sendDataThroughAadharId(adhar);
+			voter = query.sendDataThroughAadharId(adhar,verify.getB_id());
 			System.out.println("inside adhar");
 			System.out.println(voter.getFirst_name());
 		}

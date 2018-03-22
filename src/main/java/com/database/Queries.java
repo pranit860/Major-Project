@@ -125,10 +125,10 @@ public class Queries {
 				
 				booth.setId_booth(rs.getString(1));
 				booth.setId_constituency(rs.getInt(2));
-				booth.setLocation_url(rs.getString(3));
-				booth.setBooth_coordinator(rs.getString(4));
-				booth.setBooth_password(rs.getString(5));
-				booth.setPincode(rs.getLong(6));
+				booth.setLocation_url(rs.getString(4));
+				booth.setBooth_coordinator(rs.getString(5));
+				booth.setBooth_password(rs.getString(6));
+				booth.setPincode(rs.getLong(7));
 				
 			 
 			}
@@ -198,9 +198,109 @@ public class Queries {
 			stmt.executeUpdate();
 			
 		}
+		
 		catch(Exception e){
 			e.printStackTrace();
 		}
 	}
 
+	public int updateBiometricTable(BiometricTable biometricTable) {
+		long id_aadhar;
+		int result = 0;
+		String thumb_print, index_finger_right, ring_finger_right;
+		
+		id_aadhar=biometricTable.getId_aadhar();
+		thumb_print=biometricTable.getThumb_print();
+		index_finger_right=biometricTable.getIndex_finger_right();
+		ring_finger_right=biometricTable.getRing_finger_right();
+		
+		try {
+		String query="Select thumb_print from biometric_table "
+				+ "where id_aadhar=?";
+		PreparedStatement stmt = connection.prepareStatement(query);
+		stmt.setLong(1,id_aadhar);
+		ResultSet rs = stmt.executeQuery();
+		if(rs.next()) {
+			System.out.println(rs.getString((1)));
+			if(rs.getString(1)!=null) {
+				System.out.println("Data already exists");
+				result=0;
+			}
+			else {
+				String query2="update biometric_table set thumb_print=?, "
+						+ "index_finger_right=?, ring_finger_right=? "
+						+ "where id_aadhar=? ";
+				PreparedStatement stmt2 = connection.prepareStatement(query2);
+				stmt2.setString(1, thumb_print);
+				stmt2.setString(2, index_finger_right);
+				stmt2.setString(3, ring_finger_right);
+				stmt2.setLong(4,id_aadhar);
+				result=stmt2.executeUpdate();
+				System.out.println("insertion successful");
+				}
+			}
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
+	public BiometricTable retrieveFingerData(String adhar)
+	{
+		String Query="SELECT * FROM biometric_table where id_aadhar=?";
+		PreparedStatement stmt;
+		ResultSet res;
+		BiometricTable table=new BiometricTable();
+		try {
+			stmt = connection.prepareStatement(Query);
+			stmt.setLong(1, Long.parseLong(adhar));
+			res=stmt.executeQuery();
+			if(res.next())
+			{
+				table.setId_aadhar(res.getLong(1));
+				table.setThumb_print(res.getString(2));
+				table.setIndex_finger_right(res.getString(3));
+				table.setRing_finger_right(res.getString(4));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return table;
+	}
+	
+	public int checkLog(String adhar)
+	{
+		String Query="SELECT log_status FROM log_table where id_aadhar=?";
+		PreparedStatement stmt;
+		ResultSet res;
+		try {
+			stmt = connection.prepareStatement(Query);
+			stmt.setLong(1, Long.parseLong(adhar));
+			res=stmt.executeQuery();
+			if(res.next())
+			{
+				if(res.getShort(1)==1)
+				return 0;
+				else
+				return 1;
+			}
+			else 
+				return -1;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return 0;
+	}
 }
+
+
+
+
+
+
+
+
+

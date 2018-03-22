@@ -6,14 +6,16 @@
 
 <body style="background-color:powderblue;">
 	<div class="right">
-		<a href="index.html">LOG OUT</a>
+		<button class="buttona button1" id="buttonlogout" onclick="location.href='index.html';">LOG OUT</button>
 	</div>
 
 	<p id="para"></p>
 	<script>
 		if (typeof (Storage) !== "undefined") {
+			if(localStorage.getItem("username")!=null)
 			document.getElementById("para").innerHTML = "Welcome " + localStorage.getItem("username");
 			//alert(localStorage.getItem("username"));
+			
 		}
 	</script>
 
@@ -90,6 +92,21 @@
 	}
 
 	.button2 {
+		border-radius: 12px;
+	}
+	.buttona {
+		background-color: #1a2a5a;
+		border: none;
+		color: white;
+		padding: 10px;
+		text-align: center;
+		text-decoration: none;
+		display: inline-block;
+		font-size: 12px;
+		margin: 1px 1px;
+		cursor: pointer;
+	}
+	.button1 {
 		border-radius: 12px;
 	}
 </style>

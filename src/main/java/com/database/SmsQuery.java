@@ -1,3 +1,5 @@
+package com.database;
+
 //package message;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -107,7 +109,7 @@ public class SmsQuery {
 		
 		
 	}
-	public static void main(String args[])
+	/*public static void main(String args[])
 	{
 		//SmsQuery s1;
 		SmsQuery s=new SmsQuery();
@@ -119,7 +121,7 @@ public class SmsQuery {
 		
 		//System.out.println(s.sendDataThroughSMS());
 		
-	}
+	}*/
 	
 	
 }

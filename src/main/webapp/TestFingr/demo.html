@@ -2,9 +2,9 @@
 <html>
 <meta charset="UTF-8"> 
 <head>
-	<script src="javascript/jquery-1.8.2.js"></script>
-	<script src="javascript/mfs100-9.0.2.6.js"></script>
-	
+	<script src="jquery-1.8.2.js"></script>
+	<script src="mfs100-9.0.2.6.js"></script>
+	<script src="scan.js"></script>
 </head>
 
 <body  style="background-color:powderblue;">
@@ -18,13 +18,12 @@
 			</tr>
 			<tr>
 				<td>
-					<button  class="button button1" id="buttonscanning" >Start Scanning</button>
+					<button  class="button button1" id="buttonscanning" onclick="match()">Start Scanning</button>
 				</td>
 			</tr>
 		</table>
 		<p id="i"></p>
 	</div>
-	<script src="javascript/fingerverify.js"></script>
 </body>
 <style>
 	.scancard {
